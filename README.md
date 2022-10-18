@@ -7,7 +7,7 @@ npx create-next-app .
 
 ### tasks.json
 
-``json
+```json
 {
   "version": "2.0.0",
   "tasks": [
