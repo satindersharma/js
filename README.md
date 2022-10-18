@@ -2,7 +2,7 @@
 Javascript base code snippets
 
 ### for same dir app create
-npx create-next-app .
+### `npx create-next-app .`
 
 
 ### tasks.json
