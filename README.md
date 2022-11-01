@@ -22,23 +22,24 @@ Javascript base code snippets
   ]
 }
 ```
-```json
 
+#### vue js
+```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "npm",
-			"script": "dev",
-			"problemMatcher": [],
-			"label": "npm: dev",
-			"detail": "vite",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			  },
-		}
-	]
+"version": "2.0.0",
+"tasks": [
+	{
+		"type": "npm",
+		"script": "dev",
+		"problemMatcher": [],
+		"label": "npm: dev",
+		"detail": "vite",
+		"group": {
+			"kind": "build",
+			"isDefault": true
+		  },
+	}
+]
 }
 
 ```
