@@ -44,6 +44,9 @@ Javascript base code snippets
 
 ```
 
+### TO kill the running port on 3000
+#### netstat -ano | findstr :3000
+#### taskkill /pid 11704 /F
 
 
 
