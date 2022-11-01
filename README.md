@@ -22,6 +22,30 @@ Javascript base code snippets
   ]
 }
 ```
+```json
+
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "vite",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			  },
+		}
+	]
+}
+
+```
+
+
+
+
 ### jsonconfig.json
 ```json
 {
