@@ -66,3 +66,34 @@ Javascript base code snippets
 }
 
 ```
+
+```javascript
+
+
+            jQuery.validator.addMethod("isEmail", function (value, element) {
+                let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (this.optional(element) || !regex.test(value)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }, "Please enter a valid email address.");
+
+            $("#firstForm").validate({
+                rules:
+                {
+                    gender: { required: true },
+                    email: { required: true, email:true,  isEmail: true},
+                },
+                messages:
+                {
+                    gender:
+                    {
+                        required: "Please select gender."
+                    },
+                },
+            });
+	    
+	    
+	    
+```
