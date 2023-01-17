@@ -67,6 +67,7 @@ Javascript base code snippets
 
 ```
 
+#### Email validation with jquery
 ```javascript
 
 
