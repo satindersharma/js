@@ -69,32 +69,28 @@ Javascript base code snippets
 
 #### Email validation with jquery
 ```javascript
+jQuery.validator.addMethod("isEmail", function (value, element) {
+	let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (this.optional(element) || regex.test(value)) {
+	    return true;
+	} else {
+	    return false;
+	}
+}, "Please enter a valid email address.");
 
-
-            jQuery.validator.addMethod("isEmail", function (value, element) {
-                let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                if (this.optional(element) || !regex.test(value)) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }, "Please enter a valid email address.");
-
-            $("#firstForm").validate({
-                rules:
-                {
-                    gender: { required: true },
-                    email: { required: true, email:true,  isEmail: true},
-                },
-                messages:
-                {
-                    gender:
-                    {
-                        required: "Please select gender."
-                    },
-                },
-            });
-	    
-	    
+$("#firstForm").validate({
+rules:
+{
+    gender: { required: true },
+    email: { required: false, email: true,  isEmail: true},
+},
+messages:
+{
+    gender:
+    {
+	required: "Please select gender."
+    },
+},
+});   
 	    
 ```
