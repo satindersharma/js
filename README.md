@@ -94,3 +94,19 @@ messages:
 });   
 	    
 ```
+
+##### sort by alphabetically
+```javascript
+data.data?.sort((a, b) => a?.name > b?.name ? 1 : -1)
+```
+
+#### update the object
+
+```javascript
+
+let a = {x:1,y:2,z:3}
+
+let b = {...a,x:6,p:9}// first it will take all the object of a , and update if any match otherwise create the new atrributes
+
+console.log(b); // {x:6,y:2,z:3,p:9}
+```
