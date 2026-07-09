@@ -119,6 +119,30 @@ in earliy daes like node files and react files were iife in intself. this might 
 
 #### curring:
 
+<br />
+
+#### is JS interpreated and Compiled?
+
+how js code executed by browser
+
+when browser see <scrcript> tag. it download the file in streams. using this streams browser create tokens(simply our code parts) then parsing happens and then js create AST abstract syntaxt Tree 
+
+parsing do two things . 1syntax checking and . scope and initialization
+
+this AST goes to the Interpreter . this interpreter gieves us the byte code. now this byte code executed by the browser
+
+after  crome brings its js engine v. now what they did . the byte code is very generic . it build with default setup. it has problem . every machine is different. now the byte code is taken by compiler the google name it trubo fan. the complier look for the repetiable functions and make it fast. that is it is not only iterpreted but also compiled.
+
+<br />
+
+#### Hoisting
+
+by defualt there is no such terms in js. it is given b the developer. most of them says it is moveing athe variable and function to the top. but that is not
+
+js code execute in tow phases.  1,parsing/(memroy allocation phase) and scope intitializing. in this phase the js all variable scope sets the defaults. 
+
+
+
 a function returning a function is called curring
 
 <br />
