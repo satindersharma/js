@@ -504,5 +504,104 @@ obj.__proto__ // now you can get the prototype
 <br />
 
 <br />
+### Callbacks: 
+
+. antoher funciton passed to a function. may be because of unknwown about the time of runing the logic. inversion of control . the reponsiblite is hande over to another function.
+
+#### promises
+
+gives us the ability to run in asincronous. 
+
+```JavaScript
+const task = new Promise(function (res, rej) {
+  setTimeout(()=>{
+    res('data');
+  }, 3000)
+  
+})
+task.then((data)=>{console.log(data)})//whenever the work done, then invoke then and this gives callbackfntion
+const task = new Promise(function (res, rej) {
+  setTimeout(()=>{
+    rej('error');
+  }, 3000)
+  
+})
+const loading = true
+task.then((data)=>{console.log(data)
+                  }).catch((err)=>{
+  console.log(err) // this will show 
+                  }).finally(()=>{ // finally always execute
+  loading = false
+                  })
+
+
+//  not nessery the .then execute is same order
+task.then((data)=>{console.log(data)
+                  }).then((data)=>{console.log(data)
+                  }).then((data)=>{console.log(data)
+                  })
+
+// so to tacke this  async await approach added
+```
+
+Prpomidr.all, allSetled, any , Race
+
+async await  change the way t how we are consuming promisses
+
+```JavaScript
+const pr new Promist((res)=> {setTimeout(()=>{
+  res('Done')
+},1000)})
+async function test(){
+  pr.then((data)=>{
+    console.log('data from then', data)
+  })
+}
+test()
+
+async function test(){
+  const data = await pr;
+
+    console.log('data', data)
+}
+test()
+
+// now this is like a syncromous looking code
+
+// every async function return a promiss
+// like this
+
+test().then(d => {
+  console.log('cb in test' , d) // undefine
+})
+
+
+async function test(){
+  const data = await pr;
+
+    console.log('data', data)
+  return 4
+}
+test()
+
+// now this is like a syncromous looking code
+
+// every async function return a promiss
+// like this
+
+test().then(d => {
+  console.log('cb in test' , d) // 4
+})
+```
+
+#### async/await:  are just a syntactical sugar of how we consuming the promies
+
+### Event loop
+
+<br />
+
+<img width="1491" height="989" alt="image" src="https://github.com/user-attachments/assets/2e0dfcd7-c9a9-44b1-ac14-d86b8d6a67b6" />
+
+
 
 
