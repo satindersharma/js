@@ -277,3 +277,232 @@ x() // this will log undefuned. this is because of 4th rule. this will look in w
 
 ```
 
+
+
+===
+#### arrow function: this
+
+`this` willl point its parent scope.  it decided at parsing time. lexicaly findout/calcluctated .licial ➔ fixed. the time the parent function `this` is the arrow `this` .   
+
+```JavaScript
+const obj = {
+  name: 'k',
+  fn1:function () {
+    console.log(this.name)
+  }
+  fn2:()=>{this}
+}
+
+obj.fn1() // log 2
+obj.fn2() // log Window obj
+
+const obj1 = {
+  name: 'k',
+  fn1:function () {
+    const fn2 = ()=>{
+      
+      console.log(this)
+    }
+    fn2()
+  }
+  
+}
+
+obj1.fn1() // log obj1 (the object itself)
+
+const obj1 = {
+  name: 'k',
+  fn1:function () {
+    console.log(this.name)
+    const fn2 = ()=>{
+      console.log(this.name)
+      console.log(this)
+    }
+    fn2()
+  }
+  
+}
+
+obj1.fn1() 
+// log  
+// k
+// k
+// obj1 (the object itself)
+obj1.fn1.call({name:'C'})
+// log  
+// C
+// C
+// obj1 (the object itself)
+```
+
+<br />
+
+<br />
+
+#### Prototypes:
+
+#### protoype is simply link. its somewhat like ineheritance
+
+js is a protoype baed language means its a link based language.  
+
+undestand with a example
+
+```JavaScript
+const stName1 = 'ajay'
+const stAge1 = 24
+const stName2 = 'vijay'
+const stAge2 = 34
+
+const st1 = {
+  name:'ajay',
+  age:24
+}
+const st2 = {
+  name:'vijay',
+  age:34
+}
+
+function createStudent(studentName, studentAge) {
+  const obj = {};
+  obj.name = studentName
+  obj.age = studentAge
+  obj.checkAge = function () {
+        if(this.age < 21){
+          console.log('yes')
+        }else{
+          console.log('no')
+        }
+  }
+  return obj
+}
+
+const st1 = createStudent('ajay', 24)
+const st2= createStudent('vijay', 34)
+
+//  issue with abobe that the checkAge runction will be created for every st1 , st2 obj
+//  we want to only created once and get refered by all the objects
+
+
+//  now using Object.create the studentTasks funtion will be refered by all the objects
+// here we linked the objects created by createStudent is linked to studentTasks
+function createStudent(studentName, studentAge) {
+  const obj = Object.create(studentTasks);
+  obj.name = studentName
+  obj.age = studentAge
+  return obj
+}
+
+const studentTasks = {
+  checkAge: function () {
+        if(this.age < 21){
+          console.log('yes')
+        }else{
+          console.log('no')
+        }
+  }
+}
+
+const st1 = createStudent('ajay', 24)
+const st2= createStudent('vijay', 34)
+
+```
+
+cunstructor is just a property that pointing to the object
+
+check via \`\`\`
+
+```JavaScript
+Object.getPrototypeOf({}).constructor == Object // this will return true
+
+```
+
+the base object `Object` has special key prototype which is an object which has all the hidden methods and in that prototype there is a key `constructor` which point back to the original object.
+
+js is a property based language. now we have to understand ho js lookup for the properties
+
+```JavaScript
+const obj = {}
+obj.name // this will return undeifne as ther eis no `name` key on this obj
+obj.construcor // this will return a func. because the construcor key exists in the prototy pe chain
+
+//  js look for key in currunt obj if not found then lookup in protoype. in still not return undefined
+```
+
+#### inheretinace in js is prototype base(link based inheritance)
+
+```JavaScript
+const obj = {};
+// the above gives a newly crated object and add the refence to all methods available under `Object` prototype key methods under this object
+obj.__proto__ === Object.prototype // this will return true
+Object.getPrototypeOf(obj) === Object.prototype // this will return true
+
+//  if you write somethig like this
+
+function x(){
+  
+}
+x.bind // this bind is available in Function proto type
+console.dir(Function) // this will give you all method under prototype
+
+// so now we can do somethink like this
+
+function createStudent(studentName, studentAge) {
+  const obj = Object.create(studentTasks);
+  obj.name = studentName
+  obj.age = studentAge
+  return obj
+}
+
+// by default createStudent.prototype is an empty object. so we can add function to this
+//  this way we can add function to the prototype
+createStudent.prototype.checkAge: function () {
+        if(this.age < 21){
+          console.log('yes')
+        }else{
+          console.log('no')
+        }
+  }
+}
+
+const st1 = createStudent('ajay', 24)
+const st2= createStudent('vijay', 34)
+
+
+```
+
+<br />
+
+##### in js wehen we create new obj it will invoke new Obj. so we can like now 
+
+<br />
+
+```JavaScript
+function Test(){}
+
+let fnT = new Test()
+
+fnT.__proto__ == Test.prototype // true
+
+Test.prototype.showMyName = ()=>{console.log('react')}
+
+// inother language the is may be no wy to add ne function after the object is created , bu there
+
+fnT.showMyName() // React
+
+// so this is a link based language. this is the protoype concept
+
+```
+
+#### \[\[prototype\[]] this is the hiddend property exists in function and objext. wswhich simpy sows ki object/fn kis se lined hai. isko hum bs dekh sakte hain
+
+```JavaScript
+const obj = {}; // you can see as [[prototype]] but cannot access
+obj['[[prototype]]'] // undefine
+obj.__proto__ // now you can get the prototype
+```
+
+<br />
+
+<br />
+
+
