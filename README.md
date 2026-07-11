@@ -602,6 +602,113 @@ test().then(d => {
 
 <img width="1491" height="989" alt="image" src="https://github.com/user-attachments/assets/2e0dfcd7-c9a9-44b1-ac14-d86b8d6a67b6" />
 
+Callstack: Last in FIrst Out. 
+
+WEB API's (setTIemout, fetch,Promise ) these are not handled by js it is handled by web api(browsers) 
+
+`setTimeout(()➔ {}, 2000)`  js will give this setTimeout to web api, web api after 2 sec, web api will give the callback function `()➔{}` to the task queue. when the callstack is empty then the task queue move to the callstack. who doe this check of wheather the callstack is emty or what left in taskqueue is the `event loop` . 
+
+there are mulitple types of task qoeue, normal task queue, microtaskque. render que. microtask que has the high prority then render que then normal task queue. for example assume eventloop push the microtask to the call stack then again check in task quewhel running the first micro in between if there is any another microstak addded to task que then the eventollop gonna push the microtask first to the call stack.
+
+example 
+
+<br />
+
+```JavaScript
+// in this exampl this gonna block the code as it gonna keep running. or we get erroe. t gonna freeze
+// the call stack now gonna full in this case
+funciton fn(){
+  console.log('calling again')
+  fn()
+}
+fn()
+
+// now if you writeit like this
+function fn(){
+  console.log('cakkuibg again')
+  setTimeout(()=>{fn()}, 0)
+}
+fn()
+// as the above has setTimeout it gonna passed to web api. and that gonna push to task que, and that gonna push to call stack back when the call stack is
+// empty so it gonaa run fine. now the call stack not gonna full
+
+// 0 in setTimeout is not actualy 0 it is around 30ms so it has some time.
+
+// anothe exampele
+console.log(1);
+setTimeout(()=> console.log(2))
+Promise.resolve().then(()=>console.log(3)))
+console.log(4)
+
+// `console.log(1)` pushed to call stack=> log 1, 
+// call stack empty then now setTimeout passed to web api
+// remember the call stack is empty so promoise to web api
+// `console.log(4)` pushed to call stack=> log 4
+// now web api imidieatedly resolved and moved to task que. also promise immedietly resolved and moved to task qoue
+// the Promise has the high priority
+// so log 3,
+// now call stack empty, even loop look into task que found settimeout, pushed to call stack
+// so log 2
+```
+
+| the priority ranking from **highest to lowest**. |
+| :----------------------------------------------- |
+| <br />                                           |
+
+#### Browser
+
+| Rank | Queue / Task                 | Examples                                                                              |
+| :--- | :--------------------------- | :------------------------------------------------------------------------------------ |
+| 🥇 1 | **Synchronous (Call Stack)** | Normal JavaScript code                                                                |
+| 🥈 2 | **Microtasks**               | `Promise.then()`, `catch()`, `finally()`, `queueMicrotask()`, `MutationObserver`      |
+| 🥉 3 | **`requestAnimationFrame`**  | Animation callbacks before paint                                                      |
+| 4    | **Browser Render (Paint)**   | Screen update                                                                         |
+| 5    | **Macrotasks (Task Queue)**  | `setTimeout()`, `setInterval()`, UI events (`click`), `postMessage`, `MessageChannel` |
+
+<br />
+
+### Node.js
+
+| <br /> | <br />                       | <br />                 |
+| :----- | :--------------------------- | :--------------------- |
+| 🥇 1   | **Synchronous (Call Stack)** | Normal JavaScript code |
+
+| <br /> | <br />                             | <br />               |
+| :----- | :--------------------------------- | :------------------- |
+| 🥈 2   | **`process.nextTick()`** **Queue** | `process.nextTick()` |
+
+| <br /> | <br />         | <br />                               |
+| :----- | :------------- | :----------------------------------- |
+| 🥉 3   | **Microtasks** | `Promise.then()`, `queueMicrotask()` |
+
+| <br /> | <br />     | <br />                          |
+| :----- | :--------- | :------------------------------ |
+| 4      | **Timers** | `setTimeout()`, `setInterval()` |
+
+| <br /> | <br />                | <br />                |
+| :----- | :-------------------- | :-------------------- |
+| 5      | **Pending Callbacks** | Some system callbacks |
+
+| <br /> | <br />   | <br />        |
+| :----- | :------- | :------------ |
+| 6      | **Poll** | I/O callbacks |
+
+| <br /> | <br />    | <br />           |
+| :----- | :-------- | :--------------- |
+| 7      | **Check** | `setImmediate()` |
+
+| <br /> | <br />              | <br />                     |
+| :----- | :------------------ | :------------------------- |
+| 8      | **Close Callbacks** | `socket.on('close')`, etc. |
+
+| <br /> | <br /> | <br /> |
+| :----- | :----- | :----- |
+| <br /> | <br /> | <br /> |
+| <br /> | <br /> | <br /> |
+| <br /> | <br /> | <br /> |
+| <br /> | <br /> | <br /> |
+| <br /> | <br /> | <br /> |
+
 
 
 
