@@ -711,4 +711,187 @@ console.log(4)
 
 
 
+#### DOM:
+
+we allso has CSSOM
+
+DOM is simply in memory object representation of our html page. the eleent see in viewport, the object we see in elemnt/inspect tab is not DOM
+
+DOM created by c++ and we have that in memory object representaon in js via document. 
+
+##### OOPS in JS
+
+Does JS Support classes: answer is Yes and No
+
+before ES6 JS doen't have any concepts of classed
+
+Javascript is protoy pe based langauge which primarly focus on dunctional style of programming. 
+
+wity ES5 we got support of of classed, which is syntatic sugar over existsing functions.
+
+But thtis sytactic sugar is beyond just a sytaic sugar, its a whole new implementaion that is added in JS. its exetention beyond syntatic sugar
+
+Syntatic sugar is 60% , 40% new features added from OOP
+
+#### &#x20;Problem with procedural:
+
+security
+
+re-usability
+
+addition of new functionality
+
+##### Advantage ti OOP
+
+reusabilty
+
+adding new feature
+
+security
+
+##### Any disavantage of OOP
+
+You  get all you need but you also get what you don't need . example:< you are aking for banana but you get a a monkey holding a banan with a tree. 
+
+A class a factory of object
+
+```JavaScript
+class Superhero {
+  name = 'spiderman'
+  power = 'web'
+  location = 'earth'
+  // construcor is a reserved keyword. 
+  constructor(location) {
+    console.log('inside cunstructor')
+    if (location) {
+      this.location = location
+    }
+    
+  }
+  getName(){
+    return this.superheroName;
+  }
+  getLocation(){
+    return this.location
+  }
+}
+
+const hero = new Superhero('Erath');
+console.log(hero.getName())
+
+// inheritance
+class SilverSurfer extends Superhero{}
+
+// now if want to update contructor
+
+class SilverSurfer extends Superhero{
+  constructor(){
+    // this gonna passed to parent class
+    super('Heman')
+  }
+  getDetails(){
+    console.log(super.name) // this will gibe undefine
+    console.log(super.location) // this wll undefine
+    //  this will work
+    console.log(this.name) // this will gibe undefine
+    console.log(this.location) // this wll undefine
+
+    // super used to call the parent class method not variable
+    // two use case.
+    // 1. to cal parent class construtor
+    // 2. to call parent class method
+
+    // ex
+    super.getLocation()
+  }}
+
+// encapsulation. the below is incapuslation. when you adding mulitple things in one place
+class Superhero {
+  name = 'spiderman'
+  power = 'web'
+  location = 'earth'
+// abstraction is implementaion hiding.
+// encapsulation is information hiding
+// polymosphisam
+  class SilverSurfer {
+  fly(place){
+    console.log('fly')
+    if (place){
+      console.log('something')
+    }
+  }
+  }
+
+// by defaul eveythin is public. you can make it priviate by adding hash
+class SuperHero{
+  speciaPower = 'boat'
+}
+const siverSurfer = new SuperHero()
+console.log(siverSurfer.specialPower) // thiw will log boat. as everthin is public
+
+// to make private add hash
+
+class SuperHero{
+  #speciaPower = 'boat'
+  #getSpecialPower(){
+    
+  }
+  // but offcurse we can reutrn this
+  getDetails(){
+    return this.#speciaPower
+  }
+}
+const siverSurfer = new SuperHero()
+console.log(siverSurfer.specialPower) // thiw will trhow error as it is Private field
+console.log(siverSurfer.getSpecialPower()) // thiw will trhow error
+console.log(siverSurfer.getDetails()) // log boat
+```
+
+<br />
+
+#### super used to call the parent class method not variable // two use case.&#xA;// 1. to cal parent class construtor&#xA;// 2. to call parent class method
+
+#### abstraction is implementaion hiding
+
+#### encapsulation is information hiding
+
+plymorphisam
+
+console.log is plymorphisam. we can pass one arg, we can pass mutile prams. when you are doning more then one work is poly mophisam
+
+#### Interfaces
+
+where we can tell via using an information about the class.( just to be clear what to addd i nthe class
+
+```
+interface ISuperHero{
+name:string,
+power:String,
+getPower:Function
+}
+
+class SuperHero implemets ISuperHero{
+
+}
+
+there is no consept in js as of now but we can do via some js doc like this
+
+/** 
+* @interface ISuperHero
+* @property {string} name - The name of the Super Hero
+* @property {string} power - The superpower of the super hero
+* @method fly - The super's abilty to fly
+class SuperHero{
+name;
+constructor(){
+this.power = "Hero"
+}
+fly()[
+
+]
+}
+
+const data = new SuperHero()
+```
+
 
